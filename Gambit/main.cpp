@@ -1,4 +1,8 @@
 #include <iostream>
+
+const int MAX_LINES = 3;
+const int MIN_BET = 1;
+const int MAX_BET = 100;
 int InputInt()
 {
     int validInt;
@@ -52,11 +56,48 @@ int GetDeposit()
     }
     return amount;
 }
+int GetNumberOfLines()
+{
+    int lines;
+    while (true)
+    {
+        std::cout << "Enter The Number of Lines to Bet on 1 -"<<MAX_LINES<<": ";
+        lines = InputInt();
+        if (lines >= 1 && lines <= MAX_LINES)
+        {
+            break;
+        }
+        else
+        {
+            std::cout << "Please Enter a Valid number of lines" << std::endl;
+        }
+    }
+    return lines;
+}
+int GetBet()
+{
+    int amount;
+    while (true)
+    {
+        std::cout << "What would like to Bet on each Lines($" << MIN_BET<<"-"<<MAX_BET<<"):$ ";
+        amount = InputInt();
+        if (amount >= MIN_BET && amount <= MAX_BET)
+        {
+            break;
+        }
+        else
+        {
+            std::cout << "Amount must be Betwen " << MIN_BET << "-" << MAX_BET << std::endl;
+        }
+    }
+    return amount;
+}
 int main()
 {   
     int totalMenu = 6;
-    int choices, balance;
+    int choices, balance,bet,lines;
     int totalDeposit = 0;
+    int totalBet = 0;
     do
     {
         m:
@@ -80,6 +121,22 @@ int main()
             else
             {
                 goto m;
+            }
+        }
+        else if (choices == 2)
+        {   
+            system("CLS");
+            bet:
+            lines = GetNumberOfLines();
+            bet = GetBet();
+            totalBet = lines * bet;
+            if (totalBet < totalDeposit)
+            {
+                std::cout << "Your Total Bet is: " << totalBet << "$" << std::endl;
+            }
+            else
+            {
+                std::cout << "You dont have enaugh money to bet, your Balance is: " << totalDeposit << "$" << std::endl;
             }
         }
     } while (choices != totalMenu);
