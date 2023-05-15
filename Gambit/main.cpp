@@ -101,13 +101,13 @@ int main()
     do
     {
         m:
+        system("CLS");
         Menu();
         std::cout << "Enter your choice: "; 
         choices = InputInt();
         if (choices == 1)
         {   
             int choice;
-            system("CLS");
             depo:
             balance = GetDeposit();
             totalDeposit += balance;
@@ -137,6 +137,31 @@ int main()
             else
             {
                 std::cout << "You dont have enaugh money to bet, your Balance is: " << totalDeposit << "$" << std::endl;
+            }
+        }
+        else if(choices == 3)
+        {   
+            withdraw:
+            std::cout << "Your balance is " << totalDeposit << " how much money do you want to withdraw:$";
+            int amount = InputInt();
+            if (totalDeposit < amount)
+            {
+                std::cout << "You dont have enaugh money to withdraw, your Balance is:$" << totalDeposit << std::endl;
+            }
+            else
+            {
+                totalDeposit -= amount;
+                std::cout << "Your balance is $" << totalDeposit<<std::endl;
+                std::cout << "You wanna Withdraw again? Press 1 to Withdraw again or press 2 to back to Menu: ";
+                int choice = InputInt();
+                if (choice == 1)
+                {
+                    goto withdraw;
+                }
+                else
+                {
+                    goto m;
+                }
             }
         }
     } while (choices != totalMenu);
